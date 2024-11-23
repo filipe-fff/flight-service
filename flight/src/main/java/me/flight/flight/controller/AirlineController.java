@@ -1,6 +1,7 @@
 package me.flight.flight.controller;
 
 import me.flight.flight.model.Airport;
+import me.flight.flight.model.FlightFilter;
 import me.flight.flight.model.Flight;
 import me.flight.flight.service.AirlineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/flights")
+@RequestMapping("/airline")
 public class AirlineController {
 
     @Autowired
@@ -21,7 +22,12 @@ public class AirlineController {
     }
 
     @GetMapping("/flights_all")
-    public ArrayList<Flight> findAlllights() {
+    public ArrayList<Flight> findAllFlights() {
         return airlineService.findAllFlights();
+    }
+
+    @PostMapping("flightsByStateByTimeByDate")
+    public ArrayList<Flight> findAllFlightsByStateByTimeByDate(@RequestBody FlightFilter flightFilter) {
+        return airlineService.findAllFlightsByStateByTimeByDate(flightFilter);
     }
 }

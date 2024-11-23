@@ -19,19 +19,19 @@ public class Flight {
     private Integer id;
 
     @Column(nullable = false)
-    private String date;
+    private LocalDate date;
 
     @Column(nullable = false)
-    private String time;
+    private LocalTime time;
 
     @Column
-    private Integer price_economy;
+    private Integer priceEconomy;
 
     @Column
-    private Integer price_business;
+    private Integer priceBusiness;
 
     @Column
-    private Integer price_first_class;
+    private Integer priceFirstClass;
 
     @ManyToOne
     @JoinColumn(name = "flight_origin", nullable = false)
