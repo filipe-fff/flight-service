@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight, Integer> {
@@ -15,13 +14,16 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
             SELECT f FROM Flight f WHERE (
                 f.flightOrigin.state LIKE %:state% AND
                 (f.date >= :dateMin AND f.date <= :dateMax) AND
-                (f.time >= :timeMin AND f.time <= :timeMax)
+                (f.priceEconomy <= :economy OR f.priceEconomy IS NULL OR :economy IS NULL) AND
+                (f.priceBusiness <= :business OR f.priceBusiness IS NULL OR :business IS NULL) AND
+                (f.priceFirstClass <= :firstClass OR f.priceFirstClass IS NULL OR :firstClass IS NULL)
             )""")
     public List<Flight> findAllFlightsByStateByTimeByDate(
             @Param("state") String state,
             @Param("dateMin") LocalDate dateMin,
             @Param("dateMax") LocalDate dateMax,
-            @Param("timeMin") LocalTime timeMin,
-            @Param("timeMax") LocalTime timeMax
+            @Param("economy") Integer economy,
+            @Param("business") Integer business,
+            @Param("firstClass") Integer firstClass
         );
 }

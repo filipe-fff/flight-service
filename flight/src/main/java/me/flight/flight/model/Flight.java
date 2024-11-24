@@ -24,13 +24,13 @@ public class Flight {
     @Column(nullable = false)
     private LocalTime time;
 
-    @Column
+    @Column(name = "price_economy")
     private Integer priceEconomy;
 
-    @Column
+    @Column(name = "price_business")
     private Integer priceBusiness;
 
-    @Column
+    @Column(name = "price_first_class")
     private Integer priceFirstClass;
 
     @ManyToOne

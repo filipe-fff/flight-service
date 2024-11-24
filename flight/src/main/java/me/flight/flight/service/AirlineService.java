@@ -45,10 +45,19 @@ public class AirlineService {
         String state = flightFilter.getState();
         LocalDate dateMin = LocalDate.parse(flightFilter.getDateMin());
         LocalDate dateMax = LocalDate.parse(flightFilter.getDateMax());
-        LocalTime timeMin = LocalTime.parse(flightFilter.getTimeMin());
-        LocalTime timeMax = LocalTime.parse(flightFilter.getTimeMax());
+        Integer economy = flightFilter.getPriceEconomy();
+        Integer business = flightFilter.getPriceBusiness();
+        Integer firstClass = flightFilter.getPriceFirstClass();
 
-        ArrayList<Flight> flightsList = new ArrayList<Flight>(flightRepository.findAllFlightsByStateByTimeByDate(state, dateMin, dateMax, timeMin, timeMax));
+        ArrayList<Flight> flightsList = new ArrayList<Flight>(flightRepository
+                .findAllFlightsByStateByTimeByDate(
+                        state,
+                        dateMin,
+                        dateMax,
+                        economy,
+                        business,
+                        firstClass
+                ));
 
         return flightsList;
     }
