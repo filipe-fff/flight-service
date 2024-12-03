@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/airline")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AirlineController {
 
     @Autowired

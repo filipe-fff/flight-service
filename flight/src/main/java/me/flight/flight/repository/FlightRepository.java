@@ -14,9 +14,9 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
             SELECT f FROM Flight f WHERE (
                 f.flightOrigin.state LIKE %:state% AND
                 (f.date >= :dateMin AND f.date <= :dateMax) AND
-                (f.priceEconomy <= :economy OR f.priceEconomy IS NULL OR :economy IS NULL) AND
-                (f.priceBusiness <= :business OR f.priceBusiness IS NULL OR :business IS NULL) AND
-                (f.priceFirstClass <= :firstClass OR f.priceFirstClass IS NULL OR :firstClass IS NULL)
+                (f.priceEconomy <= :economy OR (f.priceEconomy IS NULL AND :economy IS NULL) OR :economy IS NULL) AND
+                (f.priceBusiness <= :business OR (f.priceBusiness IS NULL AND :business IS NULL) OR :business IS NULL) AND
+                (f.priceFirstClass <= :firstClass OR (f.priceFirstClass IS NULL AND :firstClass IS NULL) OR :firstClass IS NULL)
             )""")
     public List<Flight> findAllFlightsByStateByTimeByDate(
             @Param("state") String state,
